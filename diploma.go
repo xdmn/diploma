@@ -1,11 +1,12 @@
 package main
 
 import (
-    "fmt"
+//    "fmt"
+    "github.com/xdmn/diploma/cmd"
 )
 
 
 func main() {
-    fmt.Println("Hello, xdmn!")
+    cmd.Cmd("Hello, xdmn!")
 
 }

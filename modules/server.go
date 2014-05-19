@@ -1,9 +1,9 @@
-package cmd
+package modules
 
 import(
     "fmt"
 )
 
-func Cmd(s string) {
+func Server(s string) {
     fmt.Println(s)
 }

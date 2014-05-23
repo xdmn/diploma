@@ -8,7 +8,7 @@ var (
     log_chan chan string
 )
 
-func LogInit(LOGGING bool) func(string) {
+func InitLog(LOGGING bool) func(string) {
     if LOGGING {
         log_file, err := os.Create("log.txt")
         if err!=nil {

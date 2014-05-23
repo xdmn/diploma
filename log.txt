@@ -1,9 +1,9 @@
 
 *** Log file ***
-May 19, 2014 at 11:40am
+May 21, 2014 at 9:25am
 Network:
-    7 client(s);
-    8 node(s);
-    9 server(s).
+    1 client(s);
+    5 node(s);
+    1 server(s).
 --End--
 

@@ -41,23 +41,22 @@ func main() {
     log("    "+itoa(NODES)+  " node(s);")
     log("    "+itoa(SERVERS)+" server(s).")
 
-//Routing chan
-    routing := make(chan string, 2)
-
 //Command line
-//    modules.CmdInit(routing)
+    modules.CmdInit()
 
 //DHCP (classes: client, node, server)
     modules.InitDHCP(3)
 
 //Nodes
-    modules.InitNode()
-    modules.InitNode()
-    //modules.Send("2.1","2.2","Hi, 2.2. I'm 2.1")
-    //modules.Send("me1","2.1","test")
-    //modules.Send("me2","2.2","test")
-    modules.Send("2.1","2.2","test")
-    //modules.Send("2.2","2.1","test")
+for i:=0;i<CLIENTS;i++ {
+    modules.InitUnit(1)
+}
+for i:=0;i<NODES;i++ {
+    modules.InitUnit(2)
+}
+for i:=0;i<SERVERS;i++ {
+    modules.InitUnit(3)
+}
 
 
 //Interrupt chan
@@ -76,8 +75,6 @@ fmt.Println(modules.Decrypt(modules.Decrypt(modules.Decrypt(enc3,125),124),123))
 //Main loop
     for {
         select {
-        case s := <-routing :
-                fmt.Println("yeah: ",s)
             case <-interruptChan :
                 fmt.Println("\nCTRL-C: Stop.")
                 log("--End--\n")
@@ -86,12 +83,5 @@ fmt.Println(modules.Decrypt(modules.Decrypt(modules.Decrypt(enc3,125),124),123))
             default:
             }
     }
-
-
-
-    modules.Client("Hello, client!")
-    modules.Server("Hello, server!")
-    
-    
     
 }

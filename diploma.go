@@ -27,8 +27,6 @@ func init() {
 
 func main() {
     flag.Parse()
-    itoa := strconv.Itoa
-//    atoi := strconv.Atoi
 
 //Logging
     log := modules.InitLog(LOGGING)
@@ -37,9 +35,9 @@ func main() {
     const layout = "Jan 2, 2006 at 3:04pm"
     log(t.Format(layout))
     log("Network:")
-    log("    "+itoa(CLIENTS)+" client(s);")
-    log("    "+itoa(NODES)+  " node(s);")
-    log("    "+itoa(SERVERS)+" server(s).")
+    log("    "+strconv.Itoa(CLIENTS)+" client(s);")
+    log("    "+strconv.Itoa(NODES)+  " node(s);")
+    log("    "+strconv.Itoa(SERVERS)+" server(s).")
 
 //Command line
     modules.CmdInit()
@@ -48,30 +46,21 @@ func main() {
     modules.InitDHCP(3)
 
 //Nodes
-for i:=0;i<CLIENTS;i++ {
-    modules.InitUnit(1)
-}
-for i:=0;i<NODES;i++ {
-    modules.InitUnit(2)
-}
-for i:=0;i<SERVERS;i++ {
-    modules.InitUnit(3)
-}
-
+    for i:=0;i<CLIENTS;i++ {
+        modules.InitUnit(1)
+    }
+    for i:=0;i<NODES;i++ {
+        modules.InitUnit(2)
+    }
+    for i:=0;i<SERVERS;i++ {
+        modules.InitUnit(3)
+    }
 
 //Interrupt chan
     interruptChan := make(chan os.Signal, 1)
     signal.Notify(interruptChan, os.Interrupt)
 
 
-/*enc1:=modules.Encrypt("test",123)
-enc2:=modules.Encrypt(enc1,124)
-enc3:=modules.Encrypt(enc2,125)
-fmt.Println(enc1)
-fmt.Println(enc2)
-fmt.Println(enc3)
-fmt.Println(modules.Decrypt(modules.Decrypt(modules.Decrypt(enc3,125),124),123))
-*/
 //Main loop
     for {
         select {
